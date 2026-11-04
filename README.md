@@ -1,2 +1,2 @@
-# 0xm4ksz.github.io
+# 0xM4ksZ.github.io
 Personal website 0xM4ks_
