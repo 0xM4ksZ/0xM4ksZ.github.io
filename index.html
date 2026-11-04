@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -34,11 +35,9 @@ body{
   place-items:center;
   overflow-x:hidden;
   position:relative;
-
   background:
     radial-gradient(ellipse at 50% 0%,rgba(48,75,132,.16),transparent 48%),
     #070a12;
-
   color:var(--white);
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
@@ -50,12 +49,10 @@ body::before{
   inset:0;
   z-index:0;
   pointer-events:none;
-
   background:
     radial-gradient(ellipse at 25% 35%,rgba(156,112,57,.20),transparent 45%),
     radial-gradient(ellipse at 75% 65%,rgba(75,105,170,.18),transparent 45%),
     radial-gradient(ellipse at 55% 15%,rgba(190,145,78,.12),transparent 42%);
-
   transform:translate3d(0,0,0) scale(1.05);
   animation:ambientMove 24s ease-in-out infinite alternate;
 }
@@ -84,13 +81,11 @@ body::before{
   padding:30px 26px 22px;
   border:1px solid var(--line);
   border-radius:32px;
-
   background:linear-gradient(
     155deg,
     rgba(11,16,29,.98),
     rgba(7,11,20,.98)
   );
-
   box-shadow:
     0 28px 90px rgba(0,0,0,.36),
     inset 0 1px rgba(255,255,255,.025);
@@ -153,6 +148,7 @@ body::before{
   padding:48px 0 40px;
 }
 
+/* Cyber eye avatar */
 .avatar{
   width:112px;
   height:112px;
@@ -160,17 +156,34 @@ body::before{
   border-radius:50%;
   display:grid;
   place-items:center;
-  font-size:54px;
-  font-weight:500;
-  color:white;
-  background:#1d2b47;
+  background:
+    radial-gradient(circle at 50% 45%,#263957 0%,#17243a 65%,#111a2b 100%);
   border:3px solid #526da5;
-
   box-shadow:
     0 0 0 8px rgba(82,109,165,.055),
-    0 12px 35px rgba(0,0,0,.28);
-
+    0 12px 35px rgba(0,0,0,.28),
+    0 0 25px rgba(91,145,230,.12);
   animation:avatarIn .9s .15s both;
+}
+
+.cyber-eye{
+  width:82px;
+  height:82px;
+  overflow:visible;
+  filter:drop-shadow(0 0 7px rgba(100,170,255,.35));
+}
+
+.eye-pupil{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:pupilMove 7s ease-in-out infinite;
+}
+
+.eye-lid{
+  transform-box:fill-box;
+  transform-origin:center;
+  transform:scaleY(0);
+  animation:eyeBlink 6s infinite;
 }
 
 h1{
@@ -208,22 +221,18 @@ h1{
   border-radius:23px;
   background:var(--card);
   border:1px solid transparent;
-
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   gap:18px;
-
   transform:translateY(18px);
   opacity:0;
   animation:cardIn .65s cubic-bezier(.2,.8,.2,1) forwards;
-
   transition:
     transform .24s ease,
     background .24s ease,
     border-color .24s ease,
     box-shadow .24s ease;
-
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -237,7 +246,6 @@ h1{
   transform:translateY(-5px);
   background:var(--card-hover);
   border-color:rgba(142,175,255,.38);
-
   box-shadow:
     0 14px 32px rgba(0,0,0,.24),
     0 0 24px rgba(92,133,220,.08);
@@ -301,81 +309,64 @@ h1{
 
 /* Animations */
 @keyframes ambientMove{
-  0%{
-    transform:translate3d(-1%,0,0) scale(1.05);
-  }
-  50%{
-    transform:translate3d(1%,1%,0) scale(1.09);
-  }
-  100%{
-    transform:translate3d(-1%,-1%,0) scale(1.05);
-  }
+  0%{transform:translate3d(-1%,0,0) scale(1.05)}
+  50%{transform:translate3d(1%,1%,0) scale(1.09)}
+  100%{transform:translate3d(-1%,-1%,0) scale(1.05)}
 }
 
 @keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(16px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes avatarIn{
-  from{
-    opacity:0;
-    transform:scale(.78);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+  from{opacity:0;transform:scale(.78)}
+  to{opacity:1;transform:scale(1)}
 }
 
 @keyframes cardIn{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes pulse{
-  0%,100%{
-    opacity:1;
-    box-shadow:0 0 12px #12d887;
-  }
-  50%{
-    opacity:.55;
-    box-shadow:0 0 4px #12d887;
-  }
+  0%,100%{opacity:1;box-shadow:0 0 12px #12d887}
+  50%{opacity:.55;box-shadow:0 0 4px #12d887}
+}
+
+@keyframes pupilMove{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(3px,-1px)}
+  45%{transform:translate(-2px,1px)}
+  70%{transform:translate(1px,2px)}
+}
+
+@keyframes eyeBlink{
+  0%,91%,94%,100%{transform:scaleY(0)}
+  92%,93%{transform:scaleY(1)}
 }
 
 /* Mobile */
 @media(max-width:520px){
-  body{
-    padding:16px 12px 22px;
-  }
+  body{padding:16px 12px 22px}
 
   .profile{
     padding:22px 15px 19px;
     border-radius:27px;
   }
 
-  .identity{
-    padding:38px 0 31px;
-  }
+  .identity{padding:38px 0 31px}
 
   .avatar{
     width:96px;
     height:96px;
-    font-size:46px;
   }
 
-  .links{
-    gap:10px;
+  .cyber-eye{
+    width:72px;
+    height:72px;
   }
+
+  .links{gap:10px}
 
   .link{
     min-height:143px;
@@ -384,9 +375,7 @@ h1{
     gap:14px;
   }
 
-  .link-head{
-    gap:9px;
-  }
+  .link-head{gap:9px}
 
   .icon{
     width:26px;
@@ -394,22 +383,10 @@ h1{
     flex-basis:26px;
   }
 
-  .link-name{
-    font-size:clamp(16px,4vw,20px);
-  }
-
-  .desc{
-    font-size:14px;
-  }
-
-  .open{
-    font-size:12px;
-  }
-
-  .footer{
-    font-size:11px;
-    margin-top:24px;
-  }
+  .link-name{font-size:clamp(16px,4vw,20px)}
+  .desc{font-size:14px}
+  .open{font-size:12px}
+  .footer{font-size:11px;margin-top:24px}
 }
 
 /* Reduced motion */
@@ -447,7 +424,61 @@ h1{
   </header>
 
   <section class="identity">
-    <div class="avatar" aria-label="Avatar with letter M">M</div>
+
+    <div class="avatar" aria-label="Animated cyber eye">
+      <svg class="cyber-eye" viewBox="0 0 120 120" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+          <linearGradient id="eyeOutline" x1="15" y1="20" x2="105" y2="100">
+            <stop stop-color="#A9C8FF"/>
+            <stop offset=".5" stop-color="#6D9DEB"/>
+            <stop offset="1" stop-color="#C59A5D"/>
+          </linearGradient>
+
+          <radialGradient id="irisGradient">
+            <stop stop-color="#D9E9FF"/>
+            <stop offset=".35" stop-color="#77B9FF"/>
+            <stop offset=".72" stop-color="#3976B9"/>
+            <stop offset="1" stop-color="#172C4A"/>
+          </radialGradient>
+
+          <clipPath id="eyeClip">
+            <path d="M10 60 Q60 8 110 60 Q60 112 10 60Z"/>
+          </clipPath>
+        </defs>
+
+        <g clip-path="url(#eyeClip)">
+          <path d="M10 60 Q60 8 110 60 Q60 112 10 60Z"
+                fill="#101C30"/>
+
+          <circle cx="60" cy="60" r="24"
+                  fill="url(#irisGradient)"/>
+
+          <circle cx="60" cy="60" r="17"
+                  stroke="#B9D8FF" stroke-opacity=".55"
+                  stroke-width="1.5"/>
+
+          <g class="eye-pupil">
+            <circle cx="60" cy="60" r="10" fill="#07101E"/>
+            <circle cx="56" cy="55" r="3.5" fill="#FFFFFF"
+                    fill-opacity=".85"/>
+          </g>
+
+          <path d="M10 60 Q60 8 110 60 Q60 112 10 60Z"
+                class="eye-lid" fill="#101C30"/>
+        </g>
+
+        <path d="M10 60 Q60 8 110 60 Q60 112 10 60Z"
+              stroke="url(#eyeOutline)" stroke-width="3"
+              stroke-linecap="round"/>
+
+        <path d="M28 34 L19 26 M92 34 L101 26"
+              stroke="#8EBBFF" stroke-width="2"
+              stroke-linecap="round" opacity=".65"/>
+      </svg>
+    </div>
+
     <h1>0xM4ks_</h1>
     <p class="tagline">Gamer&nbsp; • &nbsp;Tech enthusiast&nbsp; • &nbsp;Internet citizen</p>
     <p class="welcome">WELCOME TO MY DIGITAL SPACE</p>
@@ -537,7 +568,6 @@ h1{
   let height = 0;
   let particles = [];
   let lastFrame = 0;
-  let animationId;
 
   const colors = [
     "204,157,91",
@@ -574,13 +604,12 @@ h1{
   }
 
   function draw(time) {
-    animationId = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 
     if (document.hidden) return;
     if (time - lastFrame < 16) return;
 
     lastFrame = time;
-
     ctx.clearRect(0, 0, width, height);
 
     for (const p of particles) {
@@ -609,14 +638,13 @@ h1{
   window.addEventListener("resize", resize, { passive: true });
 
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) {
-      lastFrame = 0;
-    }
+    if (!document.hidden) lastFrame = 0;
   });
 
-  animationId = requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 })();
 </script>
 
 </body>
 </html>
+
